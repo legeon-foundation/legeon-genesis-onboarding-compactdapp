@@ -25,6 +25,7 @@ flowchart LR
         PG[Proof Generator and Commitment Builder]
         CONSVC[Consent Management Service]
         ESCORCH[Escrow Orchestrator]
+        REPSVC[Reputation and Metrics Service]
     end
 
     ONB --> CV
@@ -34,7 +35,7 @@ flowchart LR
 
     %% Off-Chain Storage
     subgraph STORE[Off-Chain Storage]
-        DB[(Private DB - Proof and Consent Metadata)]
+        DB[(Private DB - Proof, Metrics and Consent Metadata)]
         DOCS[(Encrypted Document Store)]
         LOGS[(Audit and Event Logs)]
     end
@@ -44,6 +45,7 @@ flowchart LR
     PG --> DB
     CONSVC --> DB
     ESCORCH --> DB
+    REPSVC --> DB
     BE --> LOGS
 
     %% Midnight Privacy Core
@@ -52,6 +54,7 @@ flowchart LR
         SDC[Selective Disclosure Contract]
         ESC[Private Escrow Contract]
         CAR[Consent and Audit Registry Contract]
+        METR[Private Performance Metrics Contract]
     end
 
     %% Cardano Public Layer (Light Touch)
@@ -65,13 +68,16 @@ flowchart LR
     PG --> CAR
     CONSVC --> CAR
     ESCORCH --> ESC
+    REPSVC --> METR
 
     DB --> VCE
     DB --> CAR
+    DB --> METR
 
     VCE --> MIDTX[Midnight Transactions and Proof State]
     ESC --> MIDTX
     CAR --> MIDTX
+    METR --> MIDTX
 
     %% Selective Disclosure Flow
     WALLET --> SDC
@@ -84,3 +90,4 @@ flowchart LR
     PNFT --> ENTUI
     GOV --> PNFT
     LOGS --> GOV
+
