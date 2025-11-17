@@ -3,7 +3,7 @@
 ```mermaid
 flowchart LR
     %% Actors
-    subgraph ACTORS[Participants]
+    subgraph ACTORS [Participants]
         C[Consultants]
         ENT[Enterprises]
         PART[Partners - MSPs, Training, SIs]
@@ -11,8 +11,8 @@ flowchart LR
     end
 
     %% On-Chain Components
-    subgraph ONCHAIN[On-Chain Components]
-        subgraph CARD[Cardano Public Layer]
+    subgraph ONCHAIN [On-Chain Components]
+        subgraph CARD [Cardano Public Layer]
             LEGN[LEGN Token Contract]
             TRES[DAO Treasury]
             GOV[Governance Modules - Proposals and Voting]
@@ -20,17 +20,17 @@ flowchart LR
             REWARD[Reward Distributor]
         end
 
-        subgraph MID[Midnight Links]
+        subgraph MID [Midnight Links]
             ESC[Private Escrow Contracts]
             METRICS[Private Performance and Delivery Metrics]
         end
     end
 
     %% Off-Chain and Platform Services
-    subgraph OFFCHAIN[Off-Chain and Platform Services]
+    subgraph OFFCHAIN [Off-Chain and Platform Services]
         MKT[Marketplace and Engagement Engine]
         TLE[Talent Liquidity Engine]
-        CGA[Client Growth Autopilot & Demand Engine]
+        CGA[Client Growth Autopilot and Demand Engine]
         REPUTE_SVC[Reputation and Scoring Service]
         GOVPORT[Governance and Voting UI]
         DIST[Reward Calculation and Distribution Service]
@@ -38,14 +38,14 @@ flowchart LR
 
     %% Enterprise Flows
     ENT -->|Direct Project Spend in Fiat or Stable| MKT
-    CGA -->|Qualified Opportunities & Proposals| MKT
-    CGA -->|Outbound Offers & Proposals| ENT
+    CGA -->|Qualified Opportunities and Proposals| MKT
+    CGA -->|Outbound Offers and Proposals| ENT
 
     MKT --> ESC
     ESC -->|Milestone Approved| MKT
 
     %% Payment and Fee Flow
-    MKT -->|Consultant Payment (Fiat or Stable)| C
+    MKT -->|Consultant Payment - Fiat or Stable| C
     MKT -->|Platform Fee 2 to 5 Percent| TRES
 
     %% Metrics and Reputation (Dynamic Reputation Graph v2)
