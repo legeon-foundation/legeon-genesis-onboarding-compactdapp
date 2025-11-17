@@ -30,6 +30,8 @@ flowchart LR
         PG[Proof Generator Service]
         MATCH[Marketplace and Matching Service]
         ENG[Engagement and Payment Orchestrator]
+        TLE[Talent Liquidity Engine]
+        CGA[Client Growth Autopilot Service]
     end
 
     ONB --> API
@@ -42,10 +44,12 @@ flowchart LR
     API --> MATCH
     API --> ENG
     API --> PG
+    API --> TLE
+    API --> CGA
 
     %% Data and Storage Layer
     subgraph DATA[Data and Storage Layer]
-        DB[(Postgres DB<br/>Profiles, Credentials, Proof Metadata)]
+        DB[(Postgres DB<br/>Profiles, Credentials, Reputation, Proof Metadata)]
         BLOB[(Encrypted Blob Storage<br/>Resumes, Cert PDFs, Contracts)]
         VEC[(Vector Store or pgvector<br/>Embeddings and Semantic Index)]
         LOGS[(Event and Audit Logs)]
@@ -59,6 +63,9 @@ flowchart LR
     MATCH --> VEC
     ENG --> DB
     ENG --> LOGS
+    TLE --> DB
+    TLE --> LOGS
+    CGA --> LOGS
 
     DB <--> VEC
 
@@ -68,6 +75,8 @@ flowchart LR
         AIPARSE[AI Credential Parsing and Enrichment]
         AIGOV[AI Governance Insights and Policy Simulation]
         AIIP[AI Knowledge and IP Extractor]
+        AIREP[AI Reputation and Scoring Engine]
+        AIGROW[AI Demand and Opportunity Scoping]
     end
 
     CV --> AIPARSE
@@ -77,12 +86,21 @@ flowchart LR
     MATCH --> AIMATCH
     AIMATCH --> VEC
     AIMATCH --> DB
+    AIMATCH --> TLE
 
     ENG --> AIGOV
     AIGOV --> LOGS
 
     AIIP --> BLOB
     AIIP --> DB
+
+    ENG --> AIREP
+    MATCH --> AIREP
+    AIREP --> DB
+    AIREP --> LOGS
+
+    AIGROW --> CGA
+    AIGROW --> MATCH
 
     %% Blockchain Layer
     subgraph BC[Blockchain Layer]
@@ -126,5 +144,7 @@ flowchart LR
 
     ENTGW --> SAPINT
     ENG --> SAPINT
+    CGA --> SAPINT
     ENTGW --> EORINT
     ENTGW --> PARTSYS
+    CGA --> PARTSYS
