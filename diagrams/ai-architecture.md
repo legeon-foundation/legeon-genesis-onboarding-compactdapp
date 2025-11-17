@@ -1,4 +1,6 @@
 # Legeon AI and Agentic Operating Framework Architecture
+
+```mermaid
 flowchart LR
     %% Data and Event Sources
     subgraph SOURCES[Data and Event Sources]
