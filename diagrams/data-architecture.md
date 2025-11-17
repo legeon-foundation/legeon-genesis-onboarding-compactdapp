@@ -108,6 +108,57 @@ classDiagram
         datetime created_at
     }
 
+    %% Dynamic Reputation Graph v2 (Off-chain Data)
+    class PerformanceMetric {
+        UUID id
+        UUID user_id
+        UUID project_id
+        string metric_type  // MILESTONE_ONTIME, CLIENT_RATING, QA_SCORE
+        float metric_value
+        string context_json
+        datetime observed_at
+    }
+
+    class ReputationScore {
+        UUID id
+        UUID user_id
+        string dimension  // GLOBAL, SAP_DOMAIN, ROLE
+        float score
+        string algorithm_version
+        datetime calculated_at
+    }
+
+    %% Talent Liquidity Engine Signals
+    class TalentSourceEvent {
+        UUID id
+        UUID user_id
+        string source_type  // REFERRAL, IMPORT, AUTODISCOVERED
+        string source_details
+        datetime created_at
+    }
+
+    %% Client Growth Autopilot and Demand
+    class DemandSignal {
+        UUID id
+        string source_type  // RFP, JOB_POSTING, PARTNER_FEED
+        string raw_source_uri
+        string raw_payload_hash
+        string status  // INGESTED, SCOPED, MATCHED
+        datetime detected_at
+        datetime last_updated_at
+    }
+
+    class Opportunity {
+        UUID id
+        UUID demand_signal_id
+        string sap_domain
+        string role_type
+        string scope_summary
+        string status  // DRAFT, SENT_TO_ENTERPRISE, ACCEPTED, CLOSED
+        datetime created_at
+        datetime last_updated_at
+    }
+
     %% Audit and Consent
     class ConsentRecord {
         UUID id
@@ -143,3 +194,14 @@ classDiagram
     Document "1" --> "many" Credential : supports
     Credential "1" --> "many" CredentialProof : proven_by
     Document "1" --> "many" Embedding : embedded_as
+
+    %% Reputation and Metrics
+    User "1" --> "many" PerformanceMetric : measured_by
+    User "1" --> "many" ReputationScore : scored_as
+
+    %% Talent Liquidity Engine Signals
+    User "1" --> "many" TalentSourceEvent : sourced_via
+
+    %% Client Growth Autopilot and Demand
+    DemandSignal "1" --> "many" Opportunity : scoped_into
+    User "1" --> "many" MatchingEvent : matches_opportunities
