@@ -26,30 +26,36 @@ flowchart LR
         end
     end
 
-    %% Off-Chain Services
+    %% Off-Chain and Platform Services
     subgraph OFFCHAIN[Off-Chain and Platform Services]
         MKT[Marketplace and Engagement Engine]
-        METRICSSVC[Metrics Aggregation and Scoring Service]
+        TLE[Talent Liquidity Engine]
+        CGA[Client Growth Autopilot & Demand Engine]
+        REPUTE_SVC[Reputation and Scoring Service]
         GOVPORT[Governance and Voting UI]
         DIST[Reward Calculation and Distribution Service]
     end
 
     %% Enterprise Flows
-    ENT -->|Project Spend in Fiat or Stable| MKT
+    ENT -->|Direct Project Spend in Fiat or Stable| MKT
+    CGA -->|Qualified Opportunities & Proposals| MKT
+    CGA -->|Outbound Offers & Proposals| ENT
+
     MKT --> ESC
     ESC -->|Milestone Approved| MKT
 
     %% Payment and Fee Flow
-    MKT -->|Consultant Payment| C
+    MKT -->|Consultant Payment (Fiat or Stable)| C
     MKT -->|Platform Fee 2 to 5 Percent| TRES
 
-    %% Metrics and Reputation
-    MKT --> METRICSSVC
-    METRICSSVC --> METRICS
-    METRICSSVC --> STAKE
+    %% Metrics and Reputation (Dynamic Reputation Graph v2)
+    MKT --> REPUTE_SVC
+    TLE --> REPUTE_SVC
+    REPUTE_SVC --> METRICS
+    REPUTE_SVC --> STAKE
 
     %% Staking and Reputation
-    C -->|Stake LEGN for Reputation| STAKE
+    C -->|Stake LEGN for Reputation and Visibility| STAKE
     GEN -->|Genesis Staking and Participation| STAKE
     PART -->|Partner Staking for Access and Slashing| STAKE
 
@@ -70,6 +76,8 @@ flowchart LR
     TRES -->|Ecosystem and Integration Grants| PART
     REWARD -->|LEGN Rewards for Delivery and Governance| C
     REWARD -->|LEGN Rewards for Genesis and Long Term Contribution| GEN
+    REWARD -->|LEGN Rewards for Talent Liquidity and Sourcing| TLE
+    REWARD -->|LEGN Rewards for Growth and Demand Generation| CGA
 
     %% Token Utility
     ENT -->|Stake or Hold LEGN for Premium Analytics and Access| LEGN
