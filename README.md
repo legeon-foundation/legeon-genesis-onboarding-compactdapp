@@ -105,7 +105,7 @@ MIT License — see `LICENSE`.
 ## About Legeon
 Legeon is building a **privacy-preserving decentralized consulting network** for SAP AI—enabling enterprises and consultants to interact with trust, confidentiality, and verifiable correctness using Midnight’s privacy-enhancing technologies.
 
-Website: https://legeon.org (placeholder)
+Website: https://legeon.co (placeholder)
 
 
 Visit: https://legeon.org
