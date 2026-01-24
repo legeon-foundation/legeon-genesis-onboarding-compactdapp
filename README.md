@@ -1,138 +1,112 @@
-# Frontend Application
+# Legeon Genesis Onboarding CompactDApp
+**Privacy-preserving consultant onboarding for SAP AI**  
+Catalyst Fund 15 — Midnight CompactDApps Track
 
-This folder will contain the Legeon Genesis Onboarding DApp frontend.
+## Overview
+The **Legeon Genesis Onboarding CompactDApp** is an open-source, privacy-first onboarding module designed for **SAP AI and hyperautomation consultants**.
 
-Notes:
-- Next.js will be used
-- Wallet connection (CIP-30) lives here
-- No direct access to raw credentials or proofs
-- All sensitive operations occur via backend APIs
+It demonstrates how **encrypted profile attributes**, **selective disclosure**, and **zero-knowledge proofs** can enable **enterprise-safe decentralized consulting** on **Midnight**—without exposing sensitive consultant or enterprise data.
 
-# legeon-genesis-onboarding-compactdapp
-Open-source Genesis Onboarding CompactDApp for Legeon — a privacy-preserving consultant onboarding module built on Midnight
-# 🌐 Legeon Genesis Onboarding CompactDApp
-### Privacy-Preserving Consultant Onboarding for SAP AI  
-**Catalyst Fund 15 — Midnight CompactDApps Track**
+This project supports Legeon’s:
+- **Phase 2: Privacy Core**
+- **Phase 3: MVP (Enterprise Gateway & Private T&M Workflows)**
 
-The Legeon Genesis Onboarding CompactDApp is an open-source, privacy-first onboarding module designed for SAP AI and hyperautomation consultants.  
-It demonstrates how encrypted profile attributes, zero-knowledge proofs, and selective disclosure can be used to enable **enterprise-safe decentralized consulting** on Midnight.
+## Status
+🚧 **In active build (vertical-slice scaffolding).**  
+This repository contains architecture + specs + placeholders for the frontend and Compact scripts. As components become runnable, this section will be updated with setup steps and demos.
 
-This project serves as the foundation for Legeon’s:
-- **Phase 2 Privacy Core**, and  
-- **Phase 3 MVP** (Enterprise Gateway & Private T&M Workflows)
+## What this CompactDApp enables (vertical slice)
+Consultants can:
+- Create **encrypted profile attributes** (3–5 fields)
+- Upload CVs **securely off-chain**
+- Generate **selective disclosure proofs** (e.g., skills, experience, eligibility)
+- Mint a **privacy-safe ProfileNFT** (**no personal data stored on-chain**)
+- Access early governance privately through **ZK-validated eligibility**
 
----
+**Design principle:** 100% of **PII remains off-chain**; on-chain logic validates proofs and issues certificates without revealing underlying data.
 
-## 🔐 What This CompactDApp Does
-This vertical slice enables consultants to:
+## Architecture (high level)
+### 1) Enterprise Systems (SAP / Fieldglass / Ariba / HRIS)
+All operational and personal data remains **off-chain** and governed by enterprise controls.
 
-- Create encrypted profile attributes (3–5 fields)
-- Upload CVs securely off-chain
-- Generate selective disclosure proofs (skills, experience, or credibility)
-- Mint a privacy-safe ProfileNFT (no personal data stored on-chain)
-- Access early governance privately through ZK-validated eligibility
-
-The full architecture is designed for **100% off-chain PII storage** and **confidential smart contract validation** using Midnight.
-
----
-
-## 🏗 Architecture Overview
-
-**1. Enterprise Systems (SAP / Fieldglass / Ariba / HRIS)**  
-All operational and personal data remains off-chain and regulated.
-
-**2. Legeon Backend (Private, Encrypted Off-Chain Storage)**  
+### 2) Legeon Backend (private, encrypted off-chain storage)
 Stores sensitive data and generates:
-- Hashes  
-- Attribute commitments  
-- Zero-knowledge proofs  
-- Profile/Assignment/Timesheet/Invoice proof artifacts  
+- hashes & commitments  
+- encrypted attributes  
+- zero-knowledge proofs  
+- proof artifacts for: **profile / assignment / timesheet / invoice**
 
-**3. Midnight Confidential L1**  
+### 3) Midnight Confidential L1
 Validates proofs privately and issues:
-- Profile Certificates  
-- Assignment/Timesheet/Invoice Certificates  
-- Encrypted reputation counters  
-- Governance logic  
+- profile certificates  
+- assignment/timesheet/invoice certificates  
+- encrypted reputation counters  
+- governance logic
 
-**4. Cardano Public L1**  
-Stores only minimal metadata (governance summaries, token actions).  
-No enterprise or consultant data is ever stored here.
+### 4) Cardano Public L1
+Stores only **minimal metadata** (e.g., governance summaries / token actions).  
+✅ No enterprise or consultant PII is stored on Cardano.
 
 See `/diagrams` for architecture graphics.
 
----
+## Repository structure
+- `/frontend` → Next.js UI (placeholder)
+- `/compact` → CompactDApp scripts (placeholder)
+- `/docs` → Documentation & future specs
+- `/diagrams` → Architecture diagrams & UI mockups
 
-## 📂 Repository Structure
+## Frontend notes
+The frontend will use **Next.js** and include:
+- Wallet connection via **CIP-30**
+- No direct access to raw credentials or proofs  
+- Sensitive operations performed via backend APIs only
 
-```plaintext
-/frontend        → React UI (placeholder)
-/compact         → CompactDApp scripts (placeholder)
-/docs            → Documentation & future specs
-/diagrams        → Architecture diagrams & UI mockups
+## Roadmap (12 weeks)
+**Weeks 1–3**
+- Architecture finalization
+- Encrypted schema
+- Compact scripts scaffolding
+- Selective disclosure design
 
-You said:
-does the below also need to be copied and pasted into the README?  🚀 Roadmap (12 Weeks)
+**Weeks 4–6**
+- React/Next.js UI prototype
+- Lace wallet integration
+- ProfileNFT contract integration
 
-Weeks 1–3:
+**Weeks 7–9**
+- Governance gating
+- Internal pilot onboarding
+- Testing & refinement
 
-Architecture
+**Weeks 10–12**
+- Documentation package
+- Public release packaging
+- Demo & Catalyst showcase
 
-Encrypted schema
+## Goals & metrics
+- Onboard up to **40 Genesis Innovators** post-build
+- Deploy **3–5 encrypted profile attributes**
+- Complete **1 selective disclosure** use case
+- Deliver **1 PET-enabled Compact script**
+- Release a fully open-source implementation
 
-Compact scripts
+## Security & privacy notes
+- No PII is stored on public chains.
+- Treat this repo as a **reference implementation**; do not deploy to production without a security review.
+- Please report security issues responsibly (see `SECURITY.md` if present, or open a private report).
 
-Selective disclosure design
+## Contributing
+Contributions, issues, and feature suggestions are welcome.  
+Please open an **Issue** to begin collaborating.
 
-Weeks 4–6:
+## License
+MIT License — see `LICENSE`.
 
-React UI prototype
+## About Legeon
+Legeon is building a **privacy-preserving decentralized consulting network** for SAP AI—enabling enterprises and consultants to interact with trust, confidentiality, and verifiable correctness using Midnight’s privacy-enhancing technologies.
 
-Lace wallet integration
+Website: https://legeon.org (placeholder)
 
-ProfileNFT contract
-
-Weeks 7–9:
-
-Governance gating
-
-Internal pilot onboarding
-
-Testing & refinement
-
-Weeks 10–12:
-
-Documentation package
-
-Public GitHub release
-
-Demo & Catalyst showcase
-
-🎯 Goals & Metrics
-
-Onboard up to 40 Genesis Innovators post-build
-
-Deploy 3–5 encrypted profile attributes
-
-Complete 1 selective disclosure use case
-
-Deliver 1 PET-enabled Compact script
-
-Release fully open-source implementation
-
-📜 License
-
-This project is released under the MIT License.
-See LICENSE for full text.
-
-🤝 Contributing
-
-Contributions, issues, and feature suggestions are welcome.
-Please open an Issue to begin collaborating.
-
-🧭 About Legeon
-
-Legeon is building the first privacy-preserving decentralized consulting network for SAP AI, enabling enterprises and consultants to interact with trust, confidentiality, and verifiable correctness using Midnight’s Privacy-Enhancing Technologies.
 
 Visit: https://legeon.org
  (placeholder)
